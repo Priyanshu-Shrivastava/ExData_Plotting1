@@ -1,0 +1,11 @@
+data<- read.table(file.choose(),stringsAsFactors = FALSE,header = TRUE, sep= ";")
+data$Date<- as.Date(data$Date,"%d/%m/%Y") 
+d<- which(data$Date == "2007-02-01"| data$Date == "2007-02-02")
+udata<- data[d,]
+dateTime<-strptime(p,"%Y-%m-%d %H:%M:%S")
+plot(dateTime,udata$Sub_metering_1,xlab="",ylab="Energy sub metering",type="l")
+lines(dateTime, udata$Sub_metering_2,col="red")
+lines(dateTime, udata$Sub_metering_3,col="blue")
+legend("topright",legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),col= c("black","red","blue"),lwd=2.5)
+dev.copy(png, file="plot3.png", width=480, height= 480, units="px")
+dev.off()
